@@ -1,0 +1,49 @@
+{
+  "name": "@knights-eye-chess/cli-tools",
+  "version": "0.1.0-dev.2",
+  "private": true,
+  "type": "module",
+  "description": "Local controlled-turn and separately attributed delegated chess answer host",
+  "exports": {
+    "./connectors": {
+      "types": "./src/connectors.d.mts",
+      "import": "./src/connectors.mjs"
+    },
+    "./runner": {
+      "types": "./src/runner.d.mts",
+      "import": "./src/runner.mjs"
+    }
+  },
+  "bin": {
+    "knights-eye-answer": "src/cli.mjs"
+  },
+  "files": [
+    "src",
+    "tests",
+    "README.md",
+    "vendor",
+    "build.mjs",
+    "scripts",
+    "SOURCE-ORIGIN.json"
+  ],
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm run build && npm test",
+    "pack:checked": "npm run check && node scripts/pack.mjs",
+    "build": "node build.mjs",
+    "pack:artifact": "node scripts/pack.mjs"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "dependencies": {
+    "@knights-eye-chess/ai-analysis": "file:vendor/npm/knights-eye-chess-ai-analysis-0.1.0-dev.2.tgz",
+    "@knights-eye-chess/pgn-annotator": "file:vendor/npm/knights-eye-chess-pgn-annotator-0.1.0-dev.2.tgz",
+    "chess.js": "1.4.0",
+    "@knights-eye-chess/move-classifier": "file:vendor/npm/knights-eye-chess-move-classifier-0.1.0-dev.2.tgz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knights-eye-chess/cli-tools.git"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "version": "0.1.0-dev.2",
+  "sourceCommit": "d58a1a2ad3132515891a2452596ab571af4b55ba",
+  "node": "v24.19.0",
+  "sourceHashes": [
+    {
+      "path": ".gitignore",
+      "sha256": "51f1977cb4ab14529d1e1723c11e05c11e63c368926b8901c89812382fba9008"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a80a08c7ba1ab06d7c977f1636c3f173a4922fd9ff985de9938f62db325c3544"
+    },
+    {
+      "path": "README.md",
+      "sha256": "51a984fba11c793f8c81dbdc25c2d7b73a80ac076c4783d53da2242955af6827"
+    },
+    {
+      "path": "SOURCE-ORIGIN.json",
+      "sha256": "3736e13523256478862f523dd48b86e2c93185e2e04ca986c6869908557ce30d"
+    },
+    {
+      "path": "build.mjs",
+      "sha256": "3734351e5b4d64359fe69195b16e9af8d3d73524ae723da934cef5968ece9da2"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "169ac32c7f4012f3165ba533ce402e846a3974e9259866906df8c5c57c9b274b"
+    },
+    {
+      "path": "package.json",
+      "sha256": "afd91257b593c3333f3c437f09d7100ea0eb963b70b5fe4e35ec8a10c074a00f"
+    },
+    {
+      "path": "scripts/pack.mjs",
+      "sha256": "4acea39a16b814ab12fa59983e028a80cdd6cb5f128f308a8cdc184b0a78910b"
+    },
+    {
+      "path": "scripts/update-dependency.mjs",
+      "sha256": "c398519a64ccd3770af24bfdd353364e9bde5a477ae3d5ed2a54f66e279c15d6"
+    },
+    {
+      "path": "src/cli.mjs",
+      "sha256": "4ae026b9bb31085949355fcbb52d3ea58af27a01051975a943824c09eb28e0fa"
+    },
+    {
+      "path": "src/connectors.d.mts",
+      "sha256": "9d0c01b4071bb4b943b19d598108292c01c1092dee17f909be1e7557870a68bf"
+    },
+    {
+      "path": "src/connectors.mjs",
+      "sha256": "bb19306d0ad08afaf47ca6d5a1ebe120f2a0a4961ea21a8cd9a24428c395dfb9"
+    },
+    {
+      "path": "src/process-transport.mjs",
+      "sha256": "e480e62a0259a062317985cc6f67db04795636bc9389c24b6105a364dab6f67d"
+    },
+    {
+      "path": "src/runner.d.mts",
+      "sha256": "1a9e21d7a653bfba743d346a929ce2e9dcd1cfa0c88b0c7943d614c48df3b060"
+    },
+    {
+      "path": "src/runner.mjs",
+      "sha256": "0d96787974d4d514edd0fb14d3675a5a0347cb15ed28f76a87e3d6e96f6b84b0"
+    },
+    {
+      "path": "tests/connectors.test.mjs",
+      "sha256": "2d701a4c2921b69bface0b44faefdb373b88d280266d0f83c08cf4c78bcfccf7"
+    },
+    {
+      "path": "tests/process-fixture.mjs",
+      "sha256": "3de12f86bafb96c71b6ccbbc99e433e0bb098b1f96043dd86b670dc29c306755"
+    },
+    {
+      "path": "tests/runner.test.mjs",
+      "sha256": "77cdc84a886b8d874a64c5c13408750e58ede94426e56a3f23dada2953fda751"
+    }
+  ],
+  "standaloneNpmCi": true,
+  "standaloneBuild": true,
+  "standaloneTests": 12,
+  "packedConsumerNpmCi": true,
+  "packedConsumerTests": 12,
+  "typeConsumer": "not additionally run",
+  "limits": "Offline fixtures and process mocks; no real engine corpus, live model/provider, website deployment or physical-device qualification",
+  "postQualificationDocumentation": {
+    "changedFiles": [
+      "README.md"
+    ],
+    "verification": "Only repository README wording changed after passing source/packed runtime checks. Runtime, build scripts, tests and accepted dev.2 archive bytes unchanged.",
+    "artifactDocumentation": "Initial immutable dev.2 archive README retains earlier terminology; current repository README is corrected. Any future changed artifact requires a new version."
+  }
+}

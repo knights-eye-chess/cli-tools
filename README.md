@@ -30,8 +30,8 @@ are not in the public registry. Use the resulting `knights-eye-answer --help`.
 ```sh
 npm install /absolute/artifacts/knights-eye-chess-move-classifier-0.1.0-dev.2.tgz \
   /absolute/artifacts/knights-eye-chess-pgn-annotator-0.1.0-dev.2.tgz \
-  /absolute/artifacts/knights-eye-chess-ai-analysis-0.1.0-dev.3.tgz \
-  /absolute/artifacts/knights-eye-chess-cli-tools-0.1.0-dev.3.tgz
+  /absolute/artifacts/knights-eye-chess-ai-analysis-0.1.0-dev.4.tgz \
+  /absolute/artifacts/knights-eye-chess-cli-tools-0.1.0-dev.4.tgz
 ```
 
 For a JSON connector, pass `--connector json --command executable` with repeated
@@ -82,7 +82,7 @@ npm run pack:checked
 ```
 
 The source snapshot is recorded in `SOURCE-ORIGIN.json`. This private preview
-uses version `0.1.0-dev.3`; earlier `0.1.0-dev.1` and `0.1.0-dev.2` artifacts remain immutable.
+uses version `0.1.0-dev.4`; earlier `0.1.0-dev.1`, `0.1.0-dev.2` and `0.1.0-dev.3` artifacts remain immutable.
 Internal dependencies are pinned archives in `vendor/npm`. Update an existing
 dependency with `node scripts/update-dependency.mjs @knights-eye-chess/name
 /absolute/path/package.tgz`, then run `npm ci` and `npm run check`. Review the

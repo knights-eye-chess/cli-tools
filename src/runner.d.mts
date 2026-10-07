@@ -1,8 +1,9 @@
 import type { AnswerModelConnector, AnswerPipelineResult, ReasoningPositionContext, RecordedMainLine, PositionAnalysisProvider, CompatiblePositionAnalysisProvider, runAnswerPipeline } from '@knights-eye-chess/ai-analysis';
+import type { ProcessEngineOptions } from '@knights-eye-chess/pgn-annotator/engine';
 import type { ProcessOptions, DelegatedAnswer } from './connectors.mjs';
 export type AnswerJob = ({pgn: string; fen?: never} | {fen: string; pgn?: never}) & {question: string; ply?: number; scope?: 'move'|'position'|'game'|'general'|'mixed'};
 export declare function prepareContext(job: AnswerJob): {context: ReasoningPositionContext; mainLine: RecordedMainLine; scope: NonNullable<AnswerJob['scope']>; question: string};
-export declare function createLocalAnalyzer(options: Partial<ProcessOptions>): PositionAnalysisProvider & {close(): Promise<void>};
+export declare function createLocalAnalyzer(options?: ProcessEngineOptions): PositionAnalysisProvider & {close(): Promise<void>};
 export interface AnswerOptions {
  mode?: 'controlled'|'delegated'; connector?: AnswerModelConnector; analyzer?: CompatiblePositionAnalysisProvider;
  requestId?: string; modelName?: string; signal?: AbortSignal;

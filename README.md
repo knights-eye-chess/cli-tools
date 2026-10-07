@@ -29,9 +29,9 @@ are not in the public registry. Use the resulting `knights-eye-answer --help`.
 
 ```sh
 npm install /absolute/artifacts/knights-eye-chess-move-classifier-0.1.0-dev.2.tgz \
-  /absolute/artifacts/knights-eye-chess-pgn-annotator-0.1.0-dev.2.tgz \
-  /absolute/artifacts/knights-eye-chess-ai-analysis-0.1.0-dev.4.tgz \
-  /absolute/artifacts/knights-eye-chess-cli-tools-0.1.0-dev.4.tgz
+  /absolute/artifacts/knights-eye-chess-pgn-annotator-0.1.0-dev.5.tgz \
+  /absolute/artifacts/knights-eye-chess-ai-analysis-0.1.0-dev.6.tgz \
+  /absolute/artifacts/knights-eye-chess-cli-tools-0.1.0-dev.8.tgz
 ```
 
 For a JSON connector, pass `--connector json --command executable` with repeated
@@ -82,7 +82,7 @@ npm run pack:checked
 ```
 
 The source snapshot is recorded in `SOURCE-ORIGIN.json`. This private preview
-uses version `0.1.0-dev.4`; earlier `0.1.0-dev.1`, `0.1.0-dev.2` and `0.1.0-dev.3` artifacts remain immutable.
+uses version `0.1.0-dev.8`; earlier `0.1.0-dev.1`, `0.1.0-dev.2` and `0.1.0-dev.3` artifacts remain immutable.
 Internal dependencies are pinned archives in `vendor/npm`. Update an existing
 dependency with `node scripts/update-dependency.mjs @knights-eye-chess/name
 /absolute/path/package.tgz`, then run `npm ci` and `npm run check`. Review the
@@ -92,3 +92,10 @@ No registry, automatic CI or website deployment is required for these commands.
 `pack:artifact` packs a temporary copy and records exact package versions for
 sibling dependencies. Use it instead of bare `npm pack`; repository-local file
 pins belong to the source build and are not published as consumer dependencies.
+
+Native analyzer hosts may opt into `reuseProcess`, `threads`, and `hashMb` through
+`createLocalAnalyzer`'s process-engine options. Dedicated single-thread searches
+remain the default. Optional warm reuse rejects overlapping calls, fences output
+before reuse, and drains cancellation/failure before a fresh process. The analyzer
+retains observed PV node counts and optional `native-engine-search/1` diagnostics
+from the process host without changing chess evidence or classification policy.

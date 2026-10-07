@@ -38,6 +38,7 @@ export function createLocalAnalyzer(options) {
     if (!build) throw Error('Engine returned no attributed build identity.');
     return { engine: build, engineBuild: build, command: 'go depth ' + request.depth + (request.rootMoves?.length ? ' searchmoves ' + request.rootMoves.join(' ') : ''),
       bestMove: result.bestmove ?? result.candidates[0]?.pv[0] ?? null, cacheProvenance: 'engine',
+      ...(result.diagnostics ? { diagnostics: result.diagnostics } : {}),
       lines: result.candidates.map(candidate => ({ rootMove: candidate.pv[0], pv: candidate.pv,
         depth: candidate.depth, nodes: candidate.nodes ?? null, scoreCp: candidate.scoreCp,
         mateInMoves: candidate.mate, scoreProvenance: candidate.scoreProvenance })) };

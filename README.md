@@ -1,5 +1,7 @@
 # Local answer runner — Phase 7 private preview
 
+First-party code: **AGPL-3.0-or-later**. See [LICENSING.md](LICENSING.md) for scope and third-party terms.
+
 This host consumes the installed answer pipeline. It runs controlled model turns
 through a JSON stdin/stdout process, Codex CLI or Claude CLI. Delegated execution
 is a separate mode: it gives an external agent the question/context and returns
@@ -16,7 +18,7 @@ are required by the host; an external CLI manages its own authentication.
 | PH7-05 | Delegated result is explicitly attributed to delegated mode, with pipeline/reference validation unqualified | delegated fixture tests |
 | PH7-06 | Sequential JSONL batch uses the same host per job; cancellation stops dispatch and does not persist late results | CLI batch and abort tests |
 
-Private experimental code; no public release or license grant. Protocol tests and
+Private experimental code under the approved AGPL license; no public registry release has been performed. Protocol tests and
 scripted connectors do not establish live model answer quality. Genuine local CLI
 and real-engine checks are recorded separately after execution.
 

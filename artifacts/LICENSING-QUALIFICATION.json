@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-08",
+  "issue": "https://github.com/knights-eye-chess/knightseye-net/issues/17",
+  "checks": {
+    "package": "@knights-eye-chess/cli-tools",
+    "version": "0.1.0-dev.11",
+    "codeLicense": "AGPL-3.0-or-later",
+    "unchangedRuntimeAndArtworkFiles": 6,
+    "archiveSha256": "545c1a55bb0d2b3c0a35b1a61dd52eaeed824a0901e9f4e57a9f999967d3c7b9",
+    "licenseAndNoticeFilesPresent": true
+  },
+  "previousArtifact": "knights-eye-chess-cli-tools-0.1.0-dev.10.tgz",
+  "sourceCheck": "npm ci and npm run pack:checked; see issue summary for installed artifact qualification",
+  "publication": "not performed",
+  "installedConsumerTests": {
+    "name": "@knights-eye-chess/cli-tools",
+    "version": "0.1.0-dev.11",
+    "files": 2,
+    "passed": 12,
+    "failed": 0
+  },
+  "consumerTestHarness": "Independent npm install of six exact archives with TypeScript 5.9.3, esbuild 0.28.0 and Playwright 1.62.1; no package symlinks."
+}

@@ -1,7 +1,7 @@
 {
   "registryDependencies": {
-    "@knights-eye-chess/ai-analysis": "0.1.0-dev.10",
-    "@knights-eye-chess/pgn-annotator": "0.1.0-dev.9",
-    "@knights-eye-chess/move-classifier": "0.1.0-dev.5"
+    "@knights-eye-chess/ai-analysis": "0.1.0-dev.11",
+    "@knights-eye-chess/pgn-annotator": "0.1.0-dev.10",
+    "@knights-eye-chess/move-classifier": "0.1.0-dev.6"
   }
 }

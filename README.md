@@ -27,10 +27,10 @@ npm run pack:checked
 Install their resulting archives together in your app or an empty consumer directory:
 
 ```sh
-npm install /absolute/path/to/move-classifier/artifacts/knights-eye-chess-move-classifier-0.1.0-dev.5.tgz \
-  /absolute/path/to/pgn-annotator/artifacts/knights-eye-chess-pgn-annotator-0.1.0-dev.9.tgz \
-  /absolute/path/to/ai-analysis/artifacts/knights-eye-chess-ai-analysis-0.1.0-dev.10.tgz \
-  /absolute/path/to/cli-tools/artifacts/knights-eye-chess-cli-tools-0.1.0-dev.12.tgz
+npm install /absolute/path/to/move-classifier/artifacts/knights-eye-chess-move-classifier-0.1.0-dev.6.tgz \
+  /absolute/path/to/pgn-annotator/artifacts/knights-eye-chess-pgn-annotator-0.1.0-dev.11.tgz \
+  /absolute/path/to/ai-analysis/artifacts/knights-eye-chess-ai-analysis-0.1.0-dev.11.tgz \
+  /absolute/path/to/cli-tools/artifacts/knights-eye-chess-cli-tools-0.1.0-dev.13.tgz
 ```
 
 With an authenticated Codex CLI and `stockfish` on PATH:

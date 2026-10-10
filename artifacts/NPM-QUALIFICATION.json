@@ -1,0 +1,35 @@
+{
+  "schema": "knights-eye-npm-preparation/1",
+  "candidate": {
+    "name": "@knights-eye-chess/cli-tools",
+    "version": "0.1.0-dev.12",
+    "archive": "artifacts/knights-eye-chess-cli-tools-0.1.0-dev.12.tgz",
+    "bytes": 43748,
+    "sha256": "5c4752eb8ae3be81e4eedd1de4b7bcdac7ae9a5a5068224dde43e3186717e41f",
+    "dependencies": {
+      "@knights-eye-chess/ai-analysis": "0.1.0-dev.10",
+      "@knights-eye-chess/pgn-annotator": "0.1.0-dev.9",
+      "chess.js": "1.4.0",
+      "@knights-eye-chess/move-classifier": "0.1.0-dev.5"
+    },
+    "privateSource": true,
+    "privateTarball": false
+  },
+  "checks": {
+    "sourceAndInstalledTests": 129,
+    "publicEsmImports": 19,
+    "cliHelpCommands": 2,
+    "strictNodeNextTypes": true,
+    "browserConsumer": "Chromium: board mount, tree PGN import, supplied-evidence classifier",
+    "npmPublishDryRun": true,
+    "combinedSixArchiveInstall": true,
+    "historicalArchivesUnchanged": 62,
+    "immutableCollisionRejected": true
+  },
+  "registryPublicationPerformed": false,
+  "visibilityChanged": false,
+  "limitations": [
+    "No live model quality or engine performance claim",
+    "Owner npm account/scope authority and publication authorization required"
+  ]
+}

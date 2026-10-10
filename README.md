@@ -12,26 +12,18 @@ own authentication and configuration.
 ## Get started
 
 Use Node 24 or newer and a configured Codex CLI, Claude CLI or your own JSON
-process connector. This preview has not been published to npm.
-
-Run the following in source checkouts of [Move Classifier](https://github.com/knights-eye-chess/move-classifier),
-[PGN Annotator](https://github.com/knights-eye-chess/pgn-annotator),
-[AI Analysis](https://github.com/knights-eye-chess/ai-analysis) and
-[this repository](https://github.com/knights-eye-chess/cli-tools):
+process connector. Install the published prerelease in your app or an empty
+consumer directory:
 
 ```sh
-npm ci
-npm run pack:checked
+npm install @knights-eye-chess/cli-tools@next
 ```
 
-Install their resulting archives together in your app or an empty consumer directory:
-
-```sh
-npm install /absolute/path/to/move-classifier/artifacts/knights-eye-chess-move-classifier-0.1.0-dev.6.tgz \
-  /absolute/path/to/pgn-annotator/artifacts/knights-eye-chess-pgn-annotator-0.1.0-dev.11.tgz \
-  /absolute/path/to/ai-analysis/artifacts/knights-eye-chess-ai-analysis-0.1.0-dev.11.tgz \
-  /absolute/path/to/cli-tools/artifacts/knights-eye-chess-cli-tools-0.1.0-dev.13.tgz
-```
+Its exact component dependencies install automatically. The first reviewed
+registry release is `0.1.0-dev.16`; pin that exact version for
+reproducibility. For source development, use `npm ci` and `npm run pack:checked`
+in this checkout. Historical archive provenance is in
+[SOURCE-ORIGIN.json](SOURCE-ORIGIN.json).
 
 With an authenticated Codex CLI and `stockfish` on PATH:
 

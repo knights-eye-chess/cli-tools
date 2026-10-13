@@ -1,6 +1,6 @@
 {
   "name": "@knights-eye-chess/cli-tools",
-  "version": "0.1.0-dev.19",
+  "version": "0.1.0-dev.20-board-offers.0",
   "private": true,
   "type": "module",
   "description": "Local controlled-turn and separately attributed delegated chess answer host",
@@ -45,10 +45,10 @@
     "node": ">=24.0.0"
   },
   "dependencies": {
-    "@knights-eye-chess/ai-analysis": "0.1.0-dev.17",
-    "@knights-eye-chess/pgn-annotator": "0.1.0-dev.16",
+    "@knights-eye-chess/ai-analysis": "file:vendor/npm/knights-eye-chess-ai-analysis-0.1.0-dev.18-board-offers.1.tgz",
+    "@knights-eye-chess/pgn-annotator": "file:vendor/npm/knights-eye-chess-pgn-annotator-0.1.0-dev.17-board-offers.0.tgz",
     "chess.js": "1.4.0",
-    "@knights-eye-chess/move-classifier": "0.1.0-dev.13"
+    "@knights-eye-chess/move-classifier": "file:vendor/npm/knights-eye-chess-move-classifier-0.1.0-dev.14-board-offers.1.tgz"
   },
   "repository": {
     "type": "git",

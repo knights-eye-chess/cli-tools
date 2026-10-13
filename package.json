@@ -1,6 +1,6 @@
 {
   "name": "@knights-eye-chess/cli-tools",
-  "version": "0.1.0-dev.17",
+  "version": "0.1.0-dev.18",
   "private": true,
   "type": "module",
   "description": "Local controlled-turn and separately attributed delegated chess answer host",
@@ -45,10 +45,10 @@
     "node": ">=24.0.0"
   },
   "dependencies": {
-    "@knights-eye-chess/ai-analysis": "0.1.0-dev.14",
-    "@knights-eye-chess/pgn-annotator": "0.1.0-dev.13",
+    "@knights-eye-chess/ai-analysis": "0.1.0-dev.16",
+    "@knights-eye-chess/pgn-annotator": "0.1.0-dev.15",
     "chess.js": "1.4.0",
-    "@knights-eye-chess/move-classifier": "0.1.0-dev.10"
+    "@knights-eye-chess/move-classifier": "0.1.0-dev.12"
   },
   "repository": {
     "type": "git",

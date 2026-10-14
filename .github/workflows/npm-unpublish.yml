@@ -48,7 +48,7 @@ jobs:
           [[ $REVIEWED_HEAD_SHA =~ ^[0-9a-f]{40}$ ]]
           [[ $DEPLOYED_APP_SHA =~ ^[0-9a-f]{40}$ ]]
           test "$GITHUB_SHA" = "$REVIEWED_HEAD_SHA"
-          [[ $CUTOVER_RECEIPT_URL =~ ^https://github\.com/knights-eye-chess/knightseye-net/(issues|pull|actions)/[0-9]+([/#?].*)?$ ]]
+          [[ $CUTOVER_RECEIPT_URL =~ ^https://github\.com/knights-eye-chess/knightseye-net/(issues/[0-9]+|pull/[0-9]+|actions/runs/[0-9]+)([/#?].*)?$ ]]
           case "$PACKAGE_NAME" in
             @knights-eye-chess/cli-tools|@knights-eye-chess/pgn-annotator) ;;
             *) exit 2 ;;

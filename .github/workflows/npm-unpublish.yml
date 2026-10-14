@@ -20,7 +20,7 @@ on:
         required: true
         type: string
       cutover_receipt_url:
-        description: Public app cutover verification receipt URL
+        description: Operator-verified app cutover receipt URL
         required: true
         type: string
 

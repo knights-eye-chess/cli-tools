@@ -1,0 +1,77 @@
+# DRAFT ONLY. Copy with verify-unpublish-eligibility.mjs into cli-tools after
+# cutover evidence, exact-head review, and an npm-retirement environment with
+# required reviewers are in place. Never dispatch for ordinary publication.
+name: Manually remove retired npm package
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_name:
+        description: Exact package to remove; CLI Tools must be removed first
+        required: true
+        type: choice
+        options:
+          - '@knights-eye-chess/cli-tools'
+          - '@knights-eye-chess/pgn-annotator'
+      reviewed_head_sha:
+        description: Exact reviewed CLI Tools dev commit containing this workflow
+        required: true
+        type: string
+      deployed_app_sha:
+        description: Verified deployed split-app commit with neither old package
+        required: true
+        type: string
+      cutover_confirmation:
+        description: Type ROOT-APPROVED-CUTOVER-VERIFIED after app verification
+        required: true
+        type: string
+
+permissions:
+  contents: read
+concurrency:
+  group: npm-retirement
+  cancel-in-progress: false
+
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    environment: npm-retirement
+    steps:
+      - name: Require exact reviewed manual Dev dispatch after cutover
+        env:
+          PACKAGE_NAME: ${{ inputs.package_name }}
+          REVIEWED_HEAD_SHA: ${{ inputs.reviewed_head_sha }}
+          DEPLOYED_APP_SHA: ${{ inputs.deployed_app_sha }}
+          CUTOVER_CONFIRMATION: ${{ inputs.cutover_confirmation }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_EVENT_NAME" = workflow_dispatch
+          test "$GITHUB_REPOSITORY" = knights-eye-chess/cli-tools
+          test "$GITHUB_REF" = refs/heads/dev
+          [[ $REVIEWED_HEAD_SHA =~ ^[0-9a-f]{40}$ ]]
+          [[ $DEPLOYED_APP_SHA =~ ^[0-9a-f]{40}$ ]]
+          test "$GITHUB_SHA" = "$REVIEWED_HEAD_SHA"
+          test "$CUTOVER_CONFIRMATION" = ROOT-APPROVED-CUTOVER-VERIFIED
+          case "$PACKAGE_NAME" in
+            @knights-eye-chess/cli-tools|@knights-eye-chess/pgn-annotator) ;;
+            *) exit 2 ;;
+          esac
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.19.0'
+          registry-url: https://registry.npmjs.org/
+      - name: Read-only npm policy preflight
+        env:
+          PACKAGE_NAME: ${{ inputs.package_name }}
+        run: node scripts/verify-unpublish-eligibility.mjs "$PACKAGE_NAME"
+      - name: Remove all versions of the one approved package
+        env:
+          PACKAGE_NAME: ${{ inputs.package_name }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$NODE_AUTH_TOKEN"
+          npm unpublish "$PACKAGE_NAME" --force --registry https://registry.npmjs.org/

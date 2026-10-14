@@ -28,39 +28,17 @@ Release Board UI, Game Tree and Move Classifier first; AI Analysis and PGN Annot
 
 Verify public imports, types and consumer examples after publication. No engine executable, provider credential, live AI answer or support guarantee is included. Automatic publication and future trusted-publisher configuration remain separate changes.
 
-## Prepared retirement handoff — pending integration and release review
+## npm removal after verified application cutover
 
-Claude's review of [application issue #64](https://github.com/knights-eye-chess/knightseye-net/issues/64)
-recommends moving this CLI to `composition-examples/ai-cli` and retaining one
-final compatibility release that points users there. Existing published
-versions, exports and the binary remain usable; historical archives are kept.
-The package is not deprecated yet. Prepare the final release only after all of
-these gates are recorded:
+The owner superseded the earlier final compatibility release and deprecation
+plan. Delete the CLI Tools npm package only after the split app is deployed and
+tested without it, the public examples replacement is verified, and npm's
+unpublish policy permits removal. Keep this GitHub repository and historical
+archives. CLI Tools must be removed before PGN Annotator because its published
+dev.16, dev.19 and dev.20 versions depend on that package.
 
-1. `composition-examples` is public at a reviewed immutable commit, uses exact
-   published package versions, and its pinned-checkout CLI and programmatic
-   smoke checks pass.
-2. The application and engine service no longer depend on CLI Tools or PGN
-   Annotator; the revised component graph and app checks pass.
-3. Audit registry downloads and known external consumers. Preserve any needed
-   compatibility API; use a new, unused version if the final README or archive
-   differs from a committed archive.
-4. Obtain the exact-commit release review required by the release workflow.
-
-For that final version, retain working `knights-eye-answer`, `/runner` and
-`/connectors` entry points, put the public examples URL and pinned-checkout
-instructions in its packed README, then run the normal checked pack, archive
-hash review and manual publication workflow above. Do not make a dependency-only
-release just to follow engine changes. Once publication and the examples route
-are verified, stage this npm deprecation message and command. Replace both
-placeholders, inspect the resulting URL and version range, and complete the
-exact-commit release review before running it:
-
-```sh
-EXAMPLES_COMMIT='<reviewed-public-commit-sha>'
-DEPRECATION_MESSAGE="Knight's Eye CLI Tools has moved to the executable AI CLI at https://github.com/knights-eye-chess/composition-examples/tree/${EXAMPLES_COMMIT}/ai-cli. Run it from that pinned checkout; existing prereleases remain available for compatibility."
-npm deprecate '@knights-eye-chess/cli-tools@<reviewed-range>' "$DEPRECATION_MESSAGE" --registry https://registry.npmjs.org/
-```
-
-Deprecation warns on installation; it does not unpublish any version. No publish
-or deprecation command is part of this preparation.
+The read-only eligibility findings, official npm policy link and a **non-active**
+manual workflow draft are in [the npm retirement plan](docs/npm-retirement/PLAN.md).
+That workflow must receive exact-head review, the root's cutover approval and
+a required-reviewer GitHub environment before activation. No unpublish or
+deprecation command is part of this preparation.

@@ -9,25 +9,30 @@ Use it for local game review, automated JSONL jobs or a custom model connector.
 An optional UCI engine adds search evidence. External model commands manage their
 own authentication and configuration.
 
-## Planned move to executable examples
+## Retirement after the application split
 
 The answer CLI and its local runner are moving to the separate
 [composition examples](https://github.com/knights-eye-chess/composition-examples)
 repository. Existing `@knights-eye-chess/cli-tools` prereleases and their
 `knights-eye-answer`, `/runner` and `/connectors` entry points remain available
-during the transition. This package has not yet been deprecated.
+until npm permits their removal. The owner asked to delete the npm package after
+the app split is deployed and tested; no further compatibility release or npm
+deprecation is planned. The source repository and historical archives remain.
 
-Once that repository is public with a reviewed release commit and exact published
-component dependencies, run the CLI from a pinned checkout:
+Run the replacement CLI from a pinned examples checkout:
 
 ```sh
 git clone https://github.com/knights-eye-chess/composition-examples.git
 EXAMPLES_COMMIT='<reviewed-public-commit-sha>'
 git -C composition-examples checkout --detach "$EXAMPLES_COMMIT"
 cd composition-examples
-npm ci
+node scripts/install-candidates.mjs /path/to/classifier.tgz /path/to/ai-analysis.tgz /path/to/uci-client.tgz
 node ai-cli/cli.mjs --help
 ```
+
+The candidate installer is needed until the final component versions are
+published and the examples lockfile is updated; then a clean `npm ci` can replace
+it. Follow the examples README for the reviewed archive coordinates.
 
 Replace `--help` with the same `--input`, `--fen`, `--question`, connector and
 engine options shown below. `ai-cli/runner.mjs` supplies the local
@@ -37,8 +42,8 @@ engine evidence can combine `createProcessEngine` from
 `@knights-eye-chess/uci-client/node` with `createEngineAnalysisProvider` from
 `@knights-eye-chess/ai-analysis/engine`; that replaces the old
 `createLocalAnalyzer` dependency path. Pin a reviewed checkout commit because
-the examples are not an npm library. The final release and deprecation gates
-are in [npm publishing](NPM-PUBLISHING.md).
+the examples are not an npm library. The npm removal gates are in
+[npm publishing](NPM-PUBLISHING.md).
 
 ## Get started
 

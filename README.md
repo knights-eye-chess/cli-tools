@@ -9,6 +9,37 @@ Use it for local game review, automated JSONL jobs or a custom model connector.
 An optional UCI engine adds search evidence. External model commands manage their
 own authentication and configuration.
 
+## Planned move to executable examples
+
+The answer CLI and its local runner are moving to the separate
+[composition examples](https://github.com/knights-eye-chess/composition-examples)
+repository. Existing `@knights-eye-chess/cli-tools` prereleases and their
+`knights-eye-answer`, `/runner` and `/connectors` entry points remain available
+during the transition. This package has not yet been deprecated.
+
+Once that repository is public with a reviewed release commit and exact published
+component dependencies, run the CLI from a pinned checkout:
+
+```sh
+git clone https://github.com/knights-eye-chess/composition-examples.git
+EXAMPLES_COMMIT='<reviewed-public-commit-sha>'
+git -C composition-examples checkout --detach "$EXAMPLES_COMMIT"
+cd composition-examples
+npm ci
+node ai-cli/cli.mjs --help
+```
+
+Replace `--help` with the same `--input`, `--fen`, `--question`, connector and
+engine options shown below. `ai-cli/runner.mjs` supplies the local
+`prepareContext`, `answerQuestion` and `answerBatch` composition, while
+`ai-cli/connectors.mjs` supplies the process connectors. Hosts needing only
+engine evidence can combine `createProcessEngine` from
+`@knights-eye-chess/uci-client/node` with `createEngineAnalysisProvider` from
+`@knights-eye-chess/ai-analysis/engine`; that replaces the old
+`createLocalAnalyzer` dependency path. Pin a reviewed checkout commit because
+the examples are not an npm library. The final release and deprecation gates
+are in [npm publishing](NPM-PUBLISHING.md).
+
 ## Get started
 
 Use Node 24 or newer and a configured Codex CLI, Claude CLI or your own JSON

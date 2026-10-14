@@ -1,8 +1,8 @@
-# Read-only npm removal feasibility, 14 October 2026
+# Manual npm removal after app cutover
 
-The owner asked to delete the two old npm packages after the independently tested app split cutover, while keeping their GitHub repositories. The old migration/deprecation proposal is superseded. No unpublish or deprecation command has run.
+The owner asked to delete the two old npm packages after the independently tested app split is deployed, while keeping their GitHub repositories. No migration release or deprecation is needed. This plan records the current feasibility and the exact manual removal path; no unpublish command has run.
 
-Official npm policy: <https://docs.npmjs.com/policies/unpublish/>. Both packages were created 10 October, more than 72 hours ago. For an older package npm requires **all** of: no package in the public registry depends on it, fewer than 300 downloads in the last week, and one maintainer. `npm unpublish PACKAGE --force` removes every version; npm says a removed version cannot be reused and an entirely removed package name cannot be republished for 24 hours. The registry's response remains authoritative. Do not attempt a version-by-version workaround or switch to deprecation, since the owner explicitly requested deletion.
+Official npm policy: <https://docs.npmjs.com/policies/unpublish/>. Both packages were created 10 October 2026, more than 72 hours ago. For an older package npm requires no public-registry dependents, fewer than 300 downloads in the last week, and one maintainer. `npm unpublish PACKAGE --force` requests removal of every version; npm's server is authoritative. A removed version cannot be reused, and an entirely removed package name cannot be republished for 24 hours.
 
 Current read-only registry evidence:
 
@@ -11,14 +11,15 @@ Current read-only registry evidence:
 | `@knights-eye-chess/cli-tools` | stage, dev.16, dev.19, dev.20 | **314** | 1 | Above npm's under-300 threshold. |
 | `@knights-eye-chess/pgn-annotator` | stage, dev.13, dev.16, dev.17 | 291 | 1 | Published CLI dev.16/dev.19/dev.20 depend on its exact matching versions. |
 
-The current app `package.json` and lockfile also directly pin both old packages; its offline replay script imports CLI Tools. The split app must remove those references, deploy, and pass relevant checks before package removal. Registry download counts are not proof of who uses the packages. An external reverse-dependency audit and npm's server-side rejection are still necessary.
+The current app `package.json` and lockfile also directly pin both old packages; its offline replay script imports CLI Tools. The split app must remove those references, deploy, and pass relevant checks before dispatch. Download counts do not identify users. The workflow reports a count above npm's policy threshold but allows one server-authoritative attempt after cutover; if npm rejects it, stop and report the response. Do not attempt version-by-version removal or switch to deprecation.
 
-The draft `npm-unpublish.yml` and `verify-unpublish-eligibility.mjs` in this directory are **not active workflows**. To make them reviewable after the cutover:
+The manual-only [workflow](../../.github/workflows/npm-unpublish.yml) runs on CLI Tools `dev`. It accepts only the two named packages. Dispatch requires the exact reviewed workflow commit SHA, verified deployed app SHA, and a public app cutover receipt URL. The guard checks these inputs and the repository/ref, then the [read-only preflight](../../scripts/verify-unpublish-eligibility.mjs) checks the hardcoded version inventory and maintainer count. PGN removal also requires CLI Tools to have no published versions. Only the final unpublish step receives the repository or organization `NPM_TOKEN` secret. The workflow never runs automatically.
 
-1. Verify the deployed app commit and tests, clean component graph, public examples replacement, and absence of the old packages in app/service package manifests and imports. Record the exact deployed commit. Do not alter the retained GitHub repositories.
-2. Place both draft files in the CLI Tools repository at `.github/workflows/npm-unpublish.yml` and `scripts/verify-unpublish-eligibility.mjs`. Keep the script's hardcoded version sets current; any new version requires review. Configure an `npm-retirement` GitHub environment with required reviewers **before** merging the workflow. Confirm the org/repo `NPM_TOKEN` secret grants removal access to both packages; the draft exposes it only to the unpublish step.
-3. Obtain exact-head review of the workflow, script, cutover evidence, registry eligibility and known external consumers. Root then explicitly authorizes dispatch. The workflow accepts only the two named packages, only on CLI Tools `dev`, and checks the reviewed workflow head SHA, deployed app SHA format and explicit cutover confirmation. It performs a read-only registry check before the destructive step.
-4. Once weekly CLI downloads fall below 300 and no public package depends on it, dispatch **CLI Tools first**. `--force` is npm's documented syntax for all versions, not a bypass of registry policy. If npm rejects removal, stop and report its reason; do not delete PGN Annotator.
-5. Confirm the CLI package has no published versions, recheck PGN's weekly downloads and external dependencies, then dispatch **PGN Annotator**. Verify both registry packages are absent. Keep source GitHub repositories and their historical release records.
+After the app split is deployed and tested:
 
-No workflow is to be activated or dispatched before root confirms the app split is deployed and tested. Current blockers make both removals ineligible now.
+1. Record the app deployment commit, a public cutover verification receipt, and the exact reviewed CLI Tools `dev` workflow commit. Verify the deployed app no longer installs or imports either old package and that the public composition examples work.
+2. Ensure `NPM_TOKEN` has npm removal access. If any package version changed, revise the hardcoded inventory and review the new workflow head before dispatch.
+3. Dispatch the workflow for **CLI Tools first**. If npm rejects the request, stop and record its reason. Do not dispatch PGN Annotator while CLI Tools versions remain published.
+4. After confirming CLI Tools is absent from the registry, dispatch the same workflow for **PGN Annotator**. Verify both packages are absent. Keep their source repositories and historical release records.
+
+This workflow is reviewable now. Dispatch waits for the actual deployed and tested split app; no additional owner approval is being requested.

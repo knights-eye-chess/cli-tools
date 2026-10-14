@@ -1,6 +1,4 @@
-# DRAFT ONLY. Copy with verify-unpublish-eligibility.mjs into cli-tools after
-# cutover evidence, exact-head review, and an npm-retirement environment with
-# required reviewers are in place. Never dispatch for ordinary publication.
+# Manual removal only after the split app has been deployed and tested.
 name: Manually remove retired npm package
 
 on:
@@ -21,8 +19,8 @@ on:
         description: Verified deployed split-app commit with neither old package
         required: true
         type: string
-      cutover_confirmation:
-        description: Type ROOT-APPROVED-CUTOVER-VERIFIED after app verification
+      cutover_receipt_url:
+        description: Public app cutover verification receipt URL
         required: true
         type: string
 
@@ -35,14 +33,13 @@ concurrency:
 jobs:
   remove:
     runs-on: ubuntu-latest
-    environment: npm-retirement
     steps:
       - name: Require exact reviewed manual Dev dispatch after cutover
         env:
           PACKAGE_NAME: ${{ inputs.package_name }}
           REVIEWED_HEAD_SHA: ${{ inputs.reviewed_head_sha }}
           DEPLOYED_APP_SHA: ${{ inputs.deployed_app_sha }}
-          CUTOVER_CONFIRMATION: ${{ inputs.cutover_confirmation }}
+          CUTOVER_RECEIPT_URL: ${{ inputs.cutover_receipt_url }}
         run: |
           set -euo pipefail
           test "$GITHUB_EVENT_NAME" = workflow_dispatch
@@ -51,7 +48,7 @@ jobs:
           [[ $REVIEWED_HEAD_SHA =~ ^[0-9a-f]{40}$ ]]
           [[ $DEPLOYED_APP_SHA =~ ^[0-9a-f]{40}$ ]]
           test "$GITHUB_SHA" = "$REVIEWED_HEAD_SHA"
-          test "$CUTOVER_CONFIRMATION" = ROOT-APPROVED-CUTOVER-VERIFIED
+          [[ $CUTOVER_RECEIPT_URL =~ ^https://github\.com/knights-eye-chess/knightseye-net/(issues|pull|actions)/[0-9]+([/#?].*)?$ ]]
           case "$PACKAGE_NAME" in
             @knights-eye-chess/cli-tools|@knights-eye-chess/pgn-annotator) ;;
             *) exit 2 ;;

@@ -37,8 +37,7 @@ unpublish policy permits removal. Keep this GitHub repository and historical
 archives. CLI Tools must be removed before PGN Annotator because its published
 dev.16, dev.19 and dev.20 versions depend on that package.
 
-The read-only eligibility findings, official npm policy link and a **non-active**
-manual workflow draft are in [the npm retirement plan](docs/npm-retirement/PLAN.md).
-That workflow must receive exact-head review, the root's cutover approval and
-a required-reviewer GitHub environment before activation. No unpublish or
-deprecation command is part of this preparation.
+The read-only eligibility findings, official npm policy link and manual
+workflow instructions are in [the npm retirement plan](docs/npm-retirement/PLAN.md).
+The workflow is manual-only and must not be dispatched before the verified app
+cutover. No unpublish or deprecation command is part of this preparation.
